@@ -1,4 +1,14 @@
 
+# Created by IgnoreGen
+
+### Default ###
+.DS_Store
+*.swp
+*.log
+*.bak
+*.tmp
+.idea/
+
 # Created by https://www.gitignore.io/api/rust,intellij
 
 ### Intellij ###
