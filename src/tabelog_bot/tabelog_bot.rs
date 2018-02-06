@@ -39,28 +39,6 @@ impl<'a> TabelogBot<'a> {
         (None, None)
     }
 
-    fn get_message(&self, event: Event) -> Option<String> {
-
-        if let Event::Message(content) = event {
-            if let Message::Standard(message) = *content {
-                return message.text
-            }
-        }
-
-        return None
-    }
-
-    fn get_channel(&self, event: Event) -> Option<String> {
-
-        if let Event::Message(content) = event {
-            if let Message::Standard(message) = *content {
-                return message.channel
-            }
-        }
-
-        return None
-    }
-
     fn send(&self, client: &RtmClient, channel: &str, message: &str) {
         let _ = client.sender().send_message(channel, message);
     }
