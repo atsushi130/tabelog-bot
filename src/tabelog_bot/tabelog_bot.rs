@@ -48,10 +48,10 @@ impl<'a> EventHandler for TabelogBot<'a> {
 
     fn on_event(&mut self, cli: &RtmClient, event: Event) {
 
-        let (maybeMessage, maybeChannel) = self.analyze_event(event);
+        let (maybe_message, maybe_channel) = self.analyze_event(event);
 
-        maybeMessage.iter()
-            .zip(maybeChannel.iter())
+        maybe_message.iter()
+            .zip(maybe_channel.iter())
             .filter(|&(message, _)| self.to_me(message.as_str()))
             .map( |(message, channel)| (message.replace(format!("<@{}> ", TabelogBot::USER_ID).as_str(), ""), channel))
             .for_each(|(message, channel)| println!("{}: {} {}", channel, TabelogBot::NAME, message));
