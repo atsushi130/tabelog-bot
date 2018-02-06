@@ -52,7 +52,7 @@ impl<'a> EventHandler for TabelogBot<'a> {
         maybe_message.iter()
             .zip(maybe_channel.iter())
             .filter(|&(message, _)| self.to_me(message.as_str()))
-            .map( |(message, channel)| (message.replace(format!("<@{}> ", TabelogBot::USER_ID).as_str(), ""), channel))
+            .map(|(message, channel)| (message.replace(format!("<@{}> ", TabelogBot::USER_ID).as_str(), ""), channel))
             .for_each(|(message, channel)| println!("{}: {} {}", channel, TabelogBot::NAME, message));
     }
 
