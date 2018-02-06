@@ -12,7 +12,6 @@ pub struct TabelogBot<'a> {
     phantom: PhantomData<&'a str>
 }
 
-type SlackEvent = (String, String);
 impl<'a> TabelogBot<'a> {
 
     const USER_ID: &'a str = "U93L3AP6H";
