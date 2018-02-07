@@ -6,7 +6,9 @@
 // This file may not be copied, modified, or distributed except according to those terms.
 
 use slack::{ Event, EventHandler, RtmClient, Message };
+use tabelog_searcher::TabelogClient;
 use std::marker::PhantomData;
+use super::SearchConditionTokenizer;
 
 pub struct TabelogBot<'a> {
     phantom: PhantomData<&'a str>
@@ -53,7 +55,11 @@ impl<'a> EventHandler for TabelogBot<'a> {
             .zip(maybe_channel.iter())
             .filter(|&(message, _)| self.to_me(message.as_str()))
             .map(|(message, channel)| (message.replace(format!("<@{}> ", TabelogBot::USER_ID).as_str(), ""), channel))
-            .for_each(|(message, channel)| println!("{}: {} {}", channel, TabelogBot::NAME, message));
+            .map(|(message, channel)| (channel, SearchConditionTokenizer.analyze(message.as_str())))
+            .map(|(channel, (location, word))| (channel, TabelogClient.search(&location, &word)))
+            .for_each(|(channel, results)| {
+                results.iter().for_each(|result| self.send(cli, channel, result.as_str()));
+            });
     }
 
     fn on_close(&mut self, cli: &RtmClient) {}
