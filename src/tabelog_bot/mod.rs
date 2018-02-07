@@ -7,3 +7,6 @@
 
 mod tabelog_bot;
 pub use self::tabelog_bot::TabelogBot;
+
+mod search_condition_tokenizer;
+use self::search_condition_tokenizer::SearchConditionTokenizer;
