@@ -25,5 +25,9 @@ tabelog-bot run!
 @tabelog-bot 恵比寿 ラーメン
 ```
 
+## Join bot to your slack team
+Please let Bot join as a your team member, And set `tabelog-bot` to bot's name.  
+Bot setting page: `https://{your team}.slack.com/apps/manage/custom-integrations`
+
 ## License
 tabelog-bot is available under the MIT and Apache 2.0 license. See the [LICENSE file](https://github.com/atsushi130/tabelog-bot/blob/master/license-mit).
