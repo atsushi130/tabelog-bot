@@ -30,7 +30,7 @@ impl<'a> TabelogBot<'a> {
 
     fn analyze_event(&self, event: Event) -> (Option<String>, Option<String>) {
 
-        if let Event::DesktopNotification { avatar_image, channel, content, event_ts, image_uri, is_shared, launch_uri, msg, ssb_filename, subtitle, thread_ts, title } = event {
+        if let Event::DesktopNotification { content, channel, .. } = event {
             return (content, channel)
         }
 
