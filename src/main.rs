@@ -14,16 +14,22 @@ mod tabelog_bot;
 use tabelog_bot::TabelogBot;
 
 fn main() {
-    connect();
+
+    let args: Vec<String> = std::env::args().collect();
+    let token = match args.len() {
+        0 | 1 => panic!("token not found."),
+        x => args[x - 1].clone(),
+    };
+
+    connect(&token);
 }
 
-fn connect() {
-    let key = "configure Slack token".to_string();
+fn connect(token: &str) {
 
     let mut handler = TabelogBot::from();
-    let r = RtmClient::login_and_run(&key, &mut handler);
+    let r = RtmClient::login_and_run(&token, &mut handler);
     match r {
         Ok(_) => {}
-        Err(_) => connect()
+        Err(_) => connect(token)
     }
 }
