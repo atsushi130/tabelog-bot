@@ -6,6 +6,8 @@
 // This file may not be copied, modified, or distributed except according to those terms.
 
 extern crate slack;
+extern crate tabelog_searcher;
+
 use slack::RtmClient;
 
 mod tabelog_bot;
@@ -16,12 +18,12 @@ fn main() {
 }
 
 fn connect() {
-    let key = "".to_string();
+    let key = "configure Slack token".to_string();
 
     let mut handler = TabelogBot::from();
     let r = RtmClient::login_and_run(&key, &mut handler);
     match r {
         Ok(_) => {}
-        Err(_) => connect(),
+        Err(_) => connect()
     }
 }
