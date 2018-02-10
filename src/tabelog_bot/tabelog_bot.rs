@@ -16,8 +16,7 @@ pub struct TabelogBot<'a> {
 
 impl<'a> TabelogBot<'a> {
 
-    const USER_ID: &'a str = "U93L3AP6H";
-    const NAME: &'a str    = "@tabelog-bot";
+    const NAME: &'a str = "@tabelog-bot";
 
     pub fn from<'b>() -> TabelogBot<'b> {
         TabelogBot {
@@ -26,15 +25,13 @@ impl<'a> TabelogBot<'a> {
     }
 
     fn to_me(&self, text: &str) -> bool {
-        text.contains(TabelogBot::USER_ID)
+        text.contains(TabelogBot::NAME)
     }
 
     fn analyze_event(&self, event: Event) -> (Option<String>, Option<String>) {
 
-        if let Event::Message(content) = event {
-            if let Message::Standard(message) = *content {
-                return (message.text, message.channel)
-            }
+        if let Event::DesktopNotification { avatar_image, channel, content, event_ts, image_uri, is_shared, launch_uri, msg, ssb_filename, subtitle, thread_ts, title } = event {
+            return (content, channel)
         }
 
         (None, None)
@@ -54,12 +51,12 @@ impl<'a> EventHandler for TabelogBot<'a> {
         maybe_message.iter()
             .zip(maybe_channel.iter())
             .filter(|&(message, _)| self.to_me(message.as_str()))
-            .map(|(message, channel)| (message.replace(format!("<@{}> ", TabelogBot::USER_ID).as_str(), ""), channel))
+            .map(|(message, channel)| (message.replace(format!("{} ", TabelogBot::NAME).as_str(), ""), channel))
             .map(|(message, channel)| (channel, SearchConditionTokenizer.analyze(message.as_str())))
             .map(|(channel, (location, word))| (channel, TabelogClient.search(&location, &word)))
             .for_each(|(channel, results)| {
                 results.iter().for_each(|result| self.send(cli, channel, result.as_str()));
-            });
+            })
     }
 
     fn on_close(&mut self, cli: &RtmClient) {}
