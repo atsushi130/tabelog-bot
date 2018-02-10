@@ -5,7 +5,7 @@
 // or the MIT license <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your option.
 // This file may not be copied, modified, or distributed except according to those terms.
 
-use slack::{ Event, EventHandler, RtmClient, Message };
+use slack::{ Event, EventHandler, RtmClient };
 use tabelog_searcher::TabelogClient;
 use std::marker::PhantomData;
 use super::SearchConditionTokenizer;
@@ -59,6 +59,6 @@ impl<'a> EventHandler for TabelogBot<'a> {
             })
     }
 
-    fn on_close(&mut self, cli: &RtmClient) {}
-    fn on_connect(&mut self, cli: &RtmClient) {}
+    fn on_close(&mut self, _: &RtmClient) {}
+    fn on_connect(&mut self, _: &RtmClient) {}
 }
