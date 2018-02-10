@@ -2,19 +2,9 @@
 [![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./license-mit)  
 
 ## Usage
-First, tabelog-bot install:
 ```
-❯ curl -sL --proto-redir -all, https https://raw.githubusercontent.com/atsushi130/tabelog-bot/master/install.sh| sh
-```
-
-and configure Slack token to `./src/main.rs`:
-```
-let key = "configure Slack token".to_string();
-```
-
-tabelog-bot run!
-```
-❯ ./target/release/tabelog_bot
+❯ docker-compose build
+❯ TOKEN=${TOKEN} docker-compose up
 ```
 
 ## How to tabelog search
