@@ -1,6 +1,6 @@
 # tabelog-bot
-[![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./license-mit)  
-![Heroku](https://img.shields.io/badge/Heroku-Rust%20Slack%20Bot%20App-4d3e8a.svg)  
+[![MIT / Apache2.0 dual licensed](https://img.shields.io/badge/dual%20license-MIT%20/%20Apache%202.0-blue.svg)](./license-mit)
+![Heroku](https://img.shields.io/badge/Heroku-Rust%20Slack%20Bot%20App-4d3e8a.svg)
 
 ## Usage
 ```
