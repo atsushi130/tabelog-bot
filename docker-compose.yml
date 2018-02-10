@@ -1,0 +1,9 @@
+version: '2'
+services:
+  app:
+    build:
+      args:
+        - TOKEN=${TOKEN}
+      context: .
+    working_dir: /tabelog-bot
+    command: cargo run --release $TOKEN
