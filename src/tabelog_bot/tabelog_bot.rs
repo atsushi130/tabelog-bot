@@ -55,7 +55,10 @@ impl<'a> EventHandler for TabelogBot<'a> {
             .map(|(message, channel)| (channel, SearchConditionTokenizer.analyze(message.as_str())))
             .map(|(channel, (location, word))| (channel, TabelogClient.search(&location, &word)))
             .for_each(|(channel, results)| {
-                results.iter().for_each(|result| self.send(cli, channel, result.as_str()));
+                match results.is_empty() {
+                    true => self.send(cli, channel, "Not found."),
+                    false => results.iter().for_each(|result| self.send(cli, channel, result.as_str()))
+                }
             })
     }
 
